@@ -13,12 +13,13 @@ import { MatButtonModule, MatCheckboxModule } from '@angular/material';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatSelectModule} from '@angular/material/select';
 import {MatSliderModule} from '@angular/material/slider';
+import { HttpClientModule } from '@angular/common/http';
 
 
 @NgModule({
   declarations: [AppComponent],
   entryComponents: [],
-  imports: [BrowserModule,
+  imports: [BrowserModule,HttpClientModule,
      IonicModule.forRoot(), MatFormFieldModule, MatSelectModule,
      AppRoutingModule, BrowserAnimationsModule, MatSliderModule,
       MatButtonModule, MatCheckboxModule],
