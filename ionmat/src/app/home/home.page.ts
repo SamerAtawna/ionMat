@@ -1,4 +1,7 @@
 import { Component } from '@angular/core';
+import { MatInputModule } from '@angular/material/input';
+import {MatSliderModule} from '@angular/material/slider';
+import { AlertController } from '@ionic/angular';
 
 @Component({
   selector: 'app-home',
@@ -7,6 +10,18 @@ import { Component } from '@angular/core';
 })
 export class HomePage {
 
-  constructor() {}
+  constructor(private alert: AlertController) {}
+  async presentAlert() {
+    const alert = await this.alert.create({
+      header: 'Alert',
+      subHeader: 'Subtitle',
+      message: 'This is an alert message.',
+      buttons: ['Cancel', 'Open Modal', 'Delete']
+    });
+
+    await alert.present();
+  }
+
+
 
 }
