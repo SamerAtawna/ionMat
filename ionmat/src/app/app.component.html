@@ -1,3 +1,23 @@
 <ion-app>
-  <ion-router-outlet></ion-router-outlet>
+  <ion-menu side="start" menuId="custom" class="my-custom-menu">
+    <ion-header>
+      <ion-toolbar class="mm" color="primary">
+        <ion-title>Menu</ion-title>
+      </ion-toolbar>
+    </ion-header>
+    <ion-content>
+      <ion-list>
+        <ion-menu-toggle autoHide="false">
+            <ion-item routerLink="/home" routerDirection="root"> <ion-icon name="people" color="primary" padding></ion-icon>Employees</ion-item>
+        </ion-menu-toggle>
+        <ion-menu-toggle autoHide="false">
+        <ion-item routerLink="/about">  <ion-icon name="information-circle"  color="primary" padding></ion-icon>About</ion-item>
+        </ion-menu-toggle>
+        <ion-menu-toggle autoHide="false">
+            <ion-item routerLink="/tutorial">  <ion-icon name="information-circle"  color="primary" padding></ion-icon>tutorial</ion-item>
+            </ion-menu-toggle>
+      </ion-list>
+    </ion-content>
+  </ion-menu>
+  <ion-router-outlet main></ion-router-outlet>
 </ion-app>

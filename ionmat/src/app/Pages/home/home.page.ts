@@ -2,7 +2,7 @@ import { Component, Input, ElementRef, ViewChild } from '@angular/core';
 import { MatInputModule } from '@angular/material/input';
 import { MatSliderModule } from '@angular/material/slider';
 import { AlertController, LoadingController } from '@ionic/angular';
-import { MydataService } from '../mydata.service';
+import { MydataService } from '../../mydata.service';
 
 @Component({
   selector: 'app-home',

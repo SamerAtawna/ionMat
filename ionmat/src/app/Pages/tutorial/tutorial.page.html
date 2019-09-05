@@ -1,0 +1,28 @@
+<ion-content fullscreen>
+<ion-slides pager="false" (ionSlideReachEnd)="next=true" (ionSlideReachStart)="prnt()" #slides>
+    <ion-slide>
+ 
+         <img src="assets/img/ica-slidebox-img-1.png" class="slide-image">
+  <ion-label color="dark" style="font-weight: bold">Welcome to my app</ion-label>
+    </ion-slide>
+    <ion-slide>
+ 
+        <img src="assets/img/ica-slidebox-img-2.png" class="slide-image" />
+ <ion-label color="dark" style="font-weight: bold">It was made for learning purposes</ion-label>
+   </ion-slide>
+   <ion-slide>
+ 
+      <img src="assets/img/ica-slidebox-img-3.png" class="slide-image" />
+<ion-label color="dark" style="font-weight: bold">ENJOY!</ion-label>
+
+ </ion-slide>
+ 
+  </ion-slides>
+  <ion-content text-center>
+      <ion-button *ngIf="next" fill="outline" routerLink="/home" padding> 
+          <ion-icon slot="start" name="arrow-forward"></ion-icon>
+          CONTINUE
+        </ion-button>
+  </ion-content>
+
+</ion-content>
