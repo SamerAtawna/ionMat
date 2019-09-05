@@ -1,13 +1,13 @@
-const express = require('express');
-const cors = require('cors');
+const express = require("express");
+const cors = require("cors");
 const app = express();
 
 const allowedOrigins = [
-  'capacitor://localhost',
-  'ionic://localhost',
-  'http://localhost',
-  'http://localhost:8080',
-  'http://localhost:8100'
+  "capacitor://localhost",
+  "ionic://localhost",
+  "http://localhost",
+  "http://localhost:8080",
+  "http://localhost:8100"
 ];
 
 // Reflect the origin if it's in the allowed list or not defined (cURL, Postman, etc.)
@@ -16,26 +16,28 @@ const corsOptions = {
     if (allowedOrigins.includes(origin) || !origin) {
       callback(null, true);
     } else {
-      callback(new Error('Origin not allowed by CORS'));
+      callback(new Error("Origin not allowed by CORS"));
     }
   }
-}
+};
 
 // Enable preflight requests for all routes
-app.options('*', cors(corsOptions));
+app.options("*", cors(corsOptions));
 
-app.get('/', cors(corsOptions), (req, res, next) => {
-  res.json({ message: 'This route is CORS-enabled for an allowed origin.' });
-})
+app.get("/", cors(corsOptions), (req, res, next) => {
+  res.json({ message: "This route is CORS-enabled for an allowed origin." });
+});
 
 app.listen(3000, () => {
-  console.log('CORS-enabled web server listening on port 3000');
+  console.log("CORS-enabled web server listening on port 3000");
 });
-app.get('/data', (req,res)=>{
-    setTimeout(() => {
-        res.send(
-            [{name:"samer"},{name:"ahmadaaa"}]
-       )
-    }, 0);
- 
-})
+app.get("/data", (req, res) => {
+  setTimeout(() => {
+    res.send([{ name: "samer" }, 
+    { name: "david" }
+    ,{ name: "james" }
+    ,{ name: "rafi" },
+    { name: "jony" }
+  ]);
+  }, 0);
+});
