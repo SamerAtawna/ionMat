@@ -34,8 +34,8 @@ app.listen(3000, () => {
 app.get('/data', (req,res)=>{
     setTimeout(() => {
         res.send(
-            [{name:"samer"},{name:"ahmad"}]
+            [{name:"samer"},{name:"ahmadaaa"}]
        )
-    }, 1500);
+    }, 0);
  
 })

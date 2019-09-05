@@ -6,7 +6,7 @@ import { RequestOptions } from 'http';
 
 const httpOptions = {
   headers: new HttpHeaders({
-    'Content-Type':  'application/json',
+    'Content-Type': 'application/json',
     'Access-Control-Allow-Origin': '*'
   })
 };
@@ -23,8 +23,19 @@ export class MydataService {
   }
 
   getUsers(): Observable<any> {
-    return this.http.get('http://localhost:3000/data').pipe(map(data => {
-      return data;
-    }));
+    return this.http.get('http://localhost:3000/data').pipe(
+      map(data => {
+        return data;
+      })
+    );
+  }
+  getUserByName(name: string): Observable<any> {
+    return this.http.get('http://localhost:3000/data').pipe(
+      map((d: Array<any>) => {
+       return d.find(s => {
+          return s.name.indexOf(name) > -1;
+        });
+      })
+    );
   }
 }

@@ -7,23 +7,24 @@
 </ion-header>
 
 <ion-content>
-  <div class="ion-padding">
-    <button mat-button>Click me!</button>
+    <ion-searchbar (ionChange)="search()" animated=true [(ngModel)]="searchInput"></ion-searchbar>
+<ion-grid>
+
+<ion-row>
+  <ion-col>
     <button mat-button (click)="getD()">GetData!</button>
     <ion-list *ngIf="data">
-      <ion-item   *ngFor="let item of data">
-        <ion-label>{{item.name}}</ion-label>
+      <ion-item *ngFor="let item of data">
+        <ion-avatar class="ion-margin">
+          <img src="https://gravatar.com/avatar/dba6bae8c566f9d4041fb9cd9ada7741?d=identicon&f=y">
+        </ion-avatar>
+        <ion-label padding>{{item.name}}</ion-label>
       </ion-item>
     </ion-list>
-<br>
-<ion-button (click)="presentAlert()">Show</ion-button>
-<br>
-
-  </div>
-  <ion-fab vertical="center" horizontal="start" slot="fixed">
-    <ion-fab-button>
-      <ion-icon name="add"></ion-icon>
-    </ion-fab-button>
-  </ion-fab>
-
+    <br>
+    <ion-button (click)="presentAlert()">Show</ion-button>
+    <br>
+  </ion-col>
+  </ion-row>
+  </ion-grid>
 </ion-content>

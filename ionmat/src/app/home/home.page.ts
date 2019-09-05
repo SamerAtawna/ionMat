@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { MatInputModule } from '@angular/material/input';
 import { MatSliderModule } from '@angular/material/slider';
 import { AlertController, LoadingController } from '@ionic/angular';
@@ -11,6 +11,7 @@ import { MydataService } from '../mydata.service';
 })
 export class HomePage {
   data: any[] = [];
+  searchInput;
   constructor(
     private alert: AlertController,
     private dt: MydataService,
@@ -41,11 +42,19 @@ export class HomePage {
   }
 
   getD() {
-    this.loading();
     this.dt.getUsers().subscribe(n => {
       this.data = Array.of(...n);
       console.log(this.data);
-      this.loadingCtrl.dismiss();
+    });
+  }
+
+  search() {
+    if (this.searchInput === '') {
+      this.getD();
+      return;
+    }
+    this.dt.getUserByName(this.searchInput).subscribe(d => {
+      this.data = Array.of(d);
     });
   }
 }
