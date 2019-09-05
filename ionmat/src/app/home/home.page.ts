@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, ElementRef, ViewChild } from '@angular/core';
 import { MatInputModule } from '@angular/material/input';
 import { MatSliderModule } from '@angular/material/slider';
 import { AlertController, LoadingController } from '@ionic/angular';
@@ -12,6 +12,8 @@ import { MydataService } from '../mydata.service';
 export class HomePage {
   data: any[] = [];
   searchInput;
+  @ViewChild('searchbar', { static: true }) searchbar;
+
   constructor(
     private alert: AlertController,
     private dt: MydataService,
@@ -28,7 +30,7 @@ export class HomePage {
     await alert.present();
   }
   loading() {
-    this.loadingCtrl
+    return this.loadingCtrl
       .create({
         message: 'Please wait...',
         spinner: 'crescent'
@@ -42,19 +44,40 @@ export class HomePage {
   }
 
   getD() {
-    this.dt.getUsers().subscribe(n => {
-      this.data = Array.of(...n);
-      console.log(this.data);
-    });
+    this.loading()
+      .then(loading => {
+        this.dt.getUsers().subscribe(n => {
+          this.data = Array.of(...n);
+          console.log(this.data);
+        });
+      })
+      .finally(() => {
+        this.loadingCtrl.dismiss();
+        setTimeout(() => {
+          this.searchbar.setFocus();
+        }, 500);
+      });
   }
 
   search() {
-    if (this.searchInput === '') {
-      this.getD();
-      return;
+    console.log(this.searchInput);
+    if (!(this.searchInput === 'undefined')) {
+      this.loading()
+        .then(loading => {
+          if (this.searchInput === '') {
+            this.getD();
+            return;
+          }
+          this.dt.getUserByName(this.searchInput).subscribe(d => {
+            this.data = Array.of(d);
+          });
+        })
+        .finally(() => {
+          this.loadingCtrl.dismiss();
+          setTimeout(() => {
+            this.searchbar.setFocus();
+          }, 500);
+        });
     }
-    this.dt.getUserByName(this.searchInput).subscribe(d => {
-      this.data = Array.of(d);
-    });
   }
 }

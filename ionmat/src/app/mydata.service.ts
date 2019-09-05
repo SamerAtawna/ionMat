@@ -2,7 +2,6 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
-import { RequestOptions } from 'http';
 
 const httpOptions = {
   headers: new HttpHeaders({
@@ -16,7 +15,6 @@ const httpOptions = {
 })
 export class MydataService {
   headers = new Headers();
-  options: RequestOptions;
   constructor(private http: HttpClient) {
     this.headers.append('Access-Control-Allow-Origin', '*');
     this.headers.append('xxorigin', '*');
