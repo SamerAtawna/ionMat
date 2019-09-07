@@ -3,6 +3,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatSliderModule } from '@angular/material/slider';
 import { AlertController, LoadingController } from '@ionic/angular';
 import { MydataService } from '../../mydata.service';
+import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 
 @Component({
   selector: 'app-home',
@@ -17,14 +18,20 @@ export class HomePage {
   constructor(
     private alert: AlertController,
     private dt: MydataService,
-    public loadingCtrl: LoadingController
-  ) {}
+    public loadingCtrl: LoadingController,
+    private splash: SplashScreen
+    ) {
+this.splash.show();
+setTimeout(() => {
+  this.splash.hide();
+}, 5000);
+  }
   async presentAlert() {
     const alert = await this.alert.create({
       header: 'Alert',
       subHeader: 'Subtitle',
       message: 'This is an alert message.',
-      buttons: ['Cancel', 'Open Modal', 'Delete']
+      buttons: ['Cancel'],
     });
 
     await alert.present();
@@ -61,6 +68,7 @@ export class HomePage {
 
   search() {
     console.log(this.searchInput);
+    console.log(this.data);
     if (!(this.searchInput === 'undefined')) {
       this.loading()
         .then(loading => {
@@ -69,7 +77,13 @@ export class HomePage {
             return;
           }
           this.dt.getUserByName(this.searchInput).subscribe(d => {
-            this.data = Array.of(d);
+            console.log('d', d);
+            if (!(d === undefined)) {
+              this.data = Array.of(d);
+            } else {
+              this.data = [];
+              console.log(this.data.length);
+            }
           });
         })
         .finally(() => {

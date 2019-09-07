@@ -1,33 +1,42 @@
 <ion-header>
   <ion-toolbar>
-      <ion-buttons slot="start">
-          <ion-menu-button></ion-menu-button>
-        </ion-buttons>
-    <ion-title>  
-  ionic Test App
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>
+      ionic Test App
     </ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
-    <ion-searchbar (ionChange)="search()" animated=true [(ngModel)]="searchInput" #searchbar></ion-searchbar>
-<ion-grid>
+  <ion-grid>
 
-<ion-row>
-  <ion-col>
-    <button mat-button (click)="getD()">Get Employees!</button>
-    <ion-list *ngIf="data" line="none">
-      <ion-item *ngFor="let item of data" detail="true" lines="inset" >
-        <ion-avatar class="ion-margin">
-          <img src="https://cdn3.iconfinder.com/data/icons/business-avatar-1/512/7_avatar-512.png">
-        </ion-avatar>
-        <ion-label padding>{{item.name | titlecase}}</ion-label>
-      </ion-item>
-    </ion-list>
-    <br>
-    <ion-button (click)="presentAlert()">Test Alert</ion-button>
-    <br>
-  </ion-col>
-  </ion-row>
+    <ion-row>
+      <ion-col size-s="12" size-lg="6" offset-lg="3">
+        <ion-searchbar (ionChange)="search()" animated=true [(ngModel)]="searchInput" #searchbar></ion-searchbar>
+
+        <button mat-button (click)="getD()">Get Employees!</button>
+        <ion-list *ngIf="data" line="none">
+          <ion-item *ngFor="let item of data" detail="true" lines="inset">
+            <ion-avatar class="ion-margin">
+              <img src="https://cdn3.iconfinder.com/data/icons/business-avatar-1/512/7_avatar-512.png">
+            </ion-avatar>
+            <ion-label padding>{{item.name | titlecase}}</ion-label>
+          </ion-item>
+        </ion-list>
+        <br>
+        <ion-card *ngIf="data.length == 0">
+          <ion-card-header>
+          </ion-card-header>
+          <ion-card-content>
+            <h3> No Data</h3>
+          </ion-card-content>
+        </ion-card>
+        <ion-button (click)="presentAlert()">Test Alert</ion-button>
+        <br>
+      </ion-col>
+    </ion-row>
   </ion-grid>
+
 </ion-content>

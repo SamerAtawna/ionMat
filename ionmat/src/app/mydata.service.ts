@@ -9,6 +9,7 @@ const httpOptions = {
     'Access-Control-Allow-Origin': '*'
   })
 };
+const apiLink = '../assets/data.json';
 
 @Injectable({
   providedIn: 'root'
@@ -21,7 +22,7 @@ export class MydataService {
   }
 
   getUsers(): Observable<any> {
-    return this.http.get('http://localhost:3000/data').pipe(
+    return this.http.get(apiLink).pipe(
       map(data => {
         console.log(data);
         return data;
@@ -29,7 +30,7 @@ export class MydataService {
     );
   }
   getUserByName(name: string): Observable<any> {
-    return this.http.get('http://localhost:3000/data').pipe(
+    return this.http.get(apiLink).pipe(
       map((d: Array<any>) => {
        return d.find(s => {
           return s.name.indexOf(name) > -1;
